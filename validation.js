@@ -81,9 +81,9 @@ export function validateSection2(currentParticipantType, elements, state) {
 
     let checks = [];
 
-    // ✅ DRIVER VALIDATION (the one you're testing)
+    // ✅ DRIVER VALIDATION
     if (role === "driver" || role === "other") {
-        checks = [
+        checks =  [
             { label: "Province", ok: () => selected(elements.provinceDriver) },
             { label: "Geographical area", ok: () => selected(elements.geoAreaDriver) },
             { label: "Experience level", ok: () => checkedRadio("experienceLevelDriver") },
@@ -91,7 +91,6 @@ export function validateSection2(currentParticipantType, elements, state) {
             { label: "Manual or Automatic", ok: () => checkedRadio("bikeTypePreferenceDriver") },
             { label: "Current bike model", ok: () => checkedRadio("currentBikeModelDriver") },
 
-            // If "Other bike model" selected, require text
             {
                 label: "Other bike model (specify)",
                 ok: () => {
@@ -103,14 +102,8 @@ export function validateSection2(currentParticipantType, elements, state) {
                 }
             },
 
-            { label: "Bike change frequency", ok: () => checkedRadio("bikeChangeFrequency") },
-            { label: "Cash up consistently", ok: () => checkedRadio("cashUpConsistently") },
-            { label: "Rent-to-buy option", ok: () => checkedRadio("rentToBuyOption") },
+            { label: "Best bike for business", ok: () => selected(elements.bestBikeSelectDriver) },
 
-            // Best bike select
-            { label: "Best bike for business (select)", ok: () => selected(elements.bestBikeSelectDriver) },
-
-            // If Best bike = Other, require text
             {
                 label: "Best bike for business (Other - specify)",
                 ok: () => {
@@ -120,6 +113,250 @@ export function validateSection2(currentParticipantType, elements, state) {
                     return true;
                 }
             }
+        ];
+    }
+
+    // ✅ OWNER / LESSOR VALIDATION
+    else if (role === "owner") {
+        const docsSelected = (el) => !!(el && el.value && el.value.trim() !== "" && el.value !== "Docs");
+
+        checks = [
+            { label: "Province", ok: () => selected(elements.provinceOwner) },
+            { label: "Geographical area", ok: () => selected(elements.geoAreaOwner) },
+            { label: "Experience level", ok: () => checkedRadio("experienceLevelOwner") },
+            { label: "Income app(s) (pick at least one)", ok: () => checkedAnyCheckbox("incomeAppsOwner") },
+
+            {
+                label: "Other app (specify)",
+                ok: () => {
+                    const otherChecked = document.getElementById("app_owner_other")?.checked;
+                    if (otherChecked) {
+                        return !!(document.getElementById("otherAppSpecifyOwner")?.value.trim());
+                    }
+                    return true;
+                }
+            },
+
+            { label: "Number of bikes rented out", ok: () => checkedRadio("numBikesRented") },
+            { label: "Rental option type", ok: () => checkedRadio("rentalOptionType") },
+            { label: "Rental price", ok: () => checkedRadio("rentalPrice") },
+            { label: "Average rental duration", ok: () => checkedRadio("avgRentalDuration") },
+            { label: "Longest rental period", ok: () => checkedRadio("longestRentalPeriod") },
+
+            //{ label: "Documentation of drivers", ok: () => docsSelected(elements.documentationOfDriversSelect) },
+
+            { label: "Documentation of drivers", ok: () => docsSelected(elements.documentationOfDriversSelect) },
+
+            {
+            label: "Documentation (Other - specify)",
+            ok: () => {
+                if (elements.documentationOfDriversSelect && elements.documentationOfDriversSelect.value === "Other") {
+                return !!(elements.otherDocumentationSpecifyDO && elements.otherDocumentationSpecifyDO.value.trim());
+                }
+                return true;
+            }
+            },
+
+            { label: "Best bike for business", ok: () => selected(elements.bestBikeSelectOwner) },
+
+            {
+            label: "Best bike (Other - specify)",
+            ok: () => {
+                if (elements.bestBikeSelectOwner && elements.bestBikeSelectOwner.value === "Other") {
+                return !!(elements.otherBestBikeSpecifyOwner && elements.otherBestBikeSpecifyOwner.value.trim());
+                }
+                return true;
+            }
+            },
+        ];
+    }
+
+    // ✅ MECHANIC VALIDATION
+    else if (role === "mechanic") {
+        const bestBikeSelect = document.getElementById("best_bike_for_business_mechanic_dm_select");
+        const bestBikeOther = document.getElementById("otherBestBikeSpecifyMechanicDM");
+
+        checks = [
+            { label: "Province", ok: () => selected(elements.provinceMechanic) },
+            { label: "Geographical area", ok: () => selected(elements.geoAreaMechanic) },
+            { label: "Experience level", ok: () => checkedRadio("experienceLevelMechanic") },
+            { label: "Fix frequency", ok: () => checkedRadio("fixFrequency") },
+            { label: "Main issues (pick at least one)", ok: () => checkedAnyCheckbox("mainIssues") },
+
+            {
+                label: "Other issue (specify)",
+                ok: () => {
+                    const otherChecked = document.getElementById("issue_other")?.checked;
+                    if (otherChecked) {
+                        return !!(document.getElementById("otherIssueSpecify")?.value.trim());
+                    }
+                    return true;
+                }
+            },
+
+            { label: "Most fixed bike model", ok: () => checkedRadio("mostFixedBikeModel") },
+
+            {
+                label: "Most fixed bike model (Other - specify)",
+                ok: () => {
+                    const otherRadio = document.getElementById("model_other_bike_mechanic");
+                    if (otherRadio && otherRadio.checked) {
+                        return !!(document.getElementById("otherFixedBikeSpecify")?.value.trim());
+                    }
+                    return true;
+                }
+            },
+
+            { label: "Best bike for business", ok: () => !!(bestBikeSelect && bestBikeSelect.value.trim() !== "") },
+
+            {
+                label: "Best bike (Other - specify)",
+                ok: () => {
+                    if (bestBikeSelect && bestBikeSelect.value === "Other") {
+                        return !!(bestBikeOther && bestBikeOther.value.trim());
+                    }
+                    return true;
+                }
+            }
+        ];
+    }
+
+    else if (role === "driver_owner") {
+        checks = [
+            // Shared from DRIVER
+            { label: "Province", ok: () => selected(elements.provinceDriver) },
+            { label: "Geographical area", ok: () => selected(elements.geoAreaDriver) },
+            { label: "Experience level", ok: () => checkedRadio("experienceLevelDriver") },
+            { label: "Income app(s)", ok: () => checkedAnyCheckbox("incomeAppsDriver") },
+            { label: "Manual or Automatic", ok: () => checkedRadio("bikeTypePreferenceDriver") },
+            { label: "Current bike model", ok: () => checkedRadio("currentBikeModelDriver") },
+
+            // Driver other model
+            {
+            label: "Other bike model (specify)",
+            ok: () => {
+                const otherRadio = document.getElementById("model_other_bike_driver");
+                if (otherRadio && otherRadio.checked) {
+                return !!(elements.otherBikeSpecifyDriver && elements.otherBikeSpecifyDriver.value.trim());
+                }
+                return true;
+            }
+            },
+
+            // Shared best bike (use DRIVER one, because owner best bike is hidden)
+            { label: "Best bike for business", ok: () => selected(elements.bestBikeSelectDriver) },
+            {
+            label: "Best bike (Other - specify)",
+            ok: () => {
+                if (elements.bestBikeSelectDriver && elements.bestBikeSelectDriver.value === "Other") {
+                return !!(elements.otherBestBikeSpecifyDriver && elements.otherBestBikeSpecifyDriver.value.trim());
+                }
+                return true;
+            }
+            },
+
+            // OWNER unique (start at Owner Q5 onwards)
+            { label: "Number of bikes rented out", ok: () => checkedRadio("numBikesRented") },
+            { label: "Rental option type", ok: () => checkedRadio("rentalOptionType") },
+            { label: "Rental price", ok: () => checkedRadio("rentalPrice") },
+            { label: "Average rental duration", ok: () => checkedRadio("avgRentalDuration") },
+            { label: "Longest rental period", ok: () => checkedRadio("longestRentalPeriod") },
+            { label: "Documentation of drivers", ok: () => selected(elements.documentationOfDriversSelect) },
+            {
+            label: "Documentation (Other - specify)",
+            ok: () => {
+                if (elements.documentationOfDriversSelect && elements.documentationOfDriversSelect.value === "Other") {
+                return !!(elements.otherDocumentationSpecifyDO && elements.otherDocumentationSpecifyDO.value.trim());
+                }
+                return true;
+            }
+            },
+
+            // Q10 + Q11 reasons remain optional (we DO NOT validate them)
+        ];
+    }
+
+    else if (role === "mechanic_owner") {
+        const bestBikeSelect = document.getElementById("best_bike_for_business_mechanic_dm_select") 
+            || document.getElementById("best_bike_for_business_mechanic_select");
+
+        checks = [
+            // Shared from MECHANIC
+            { label: "Province", ok: () => selected(elements.provinceMechanic) },
+            { label: "Geographical area", ok: () => selected(elements.geoAreaMechanic) },
+            { label: "Experience level", ok: () => checkedRadio("experienceLevelMechanic") },
+
+            // Mechanic unique
+            { label: "Fix frequency", ok: () => checkedRadio("fixFrequency") },
+            { label: "Main issues", ok: () => checkedAnyCheckbox("mainIssues") },
+            { label: "Most fixed bike model", ok: () => checkedRadio("mostFixedBikeModel") },
+
+            // Mechanic best bike (owner best bike hidden)
+            { label: "Best bike for business", ok: () => !!(bestBikeSelect && bestBikeSelect.value.trim() !== "") },
+
+            // OWNER unique
+            { label: "Number of bikes rented out", ok: () => checkedRadio("numBikesRented") },
+            { label: "Rental option type", ok: () => checkedRadio("rentalOptionType") },
+            { label: "Rental price", ok: () => checkedRadio("rentalPrice") },
+            { label: "Average rental duration", ok: () => checkedRadio("avgRentalDuration") },
+            { label: "Longest rental period", ok: () => checkedRadio("longestRentalPeriod") },
+            { label: "Documentation of drivers", ok: () => selected(elements.documentationOfDriversSelect) },
+            {
+            label: "Documentation (Other - specify)",
+            ok: () => {
+                if (elements.documentationOfDriversSelect && elements.documentationOfDriversSelect.value === "Other") {
+                return !!(elements.otherDocumentationSpecifyDO && elements.otherDocumentationSpecifyDO.value.trim());
+                }
+                return true;
+            }
+            },
+        ];
+    }
+
+    else if (role === "driver_mechanic") {
+        checks = [
+            // Shared from DRIVER
+            { label: "Province", ok: () => selected(elements.provinceDriver) },
+            { label: "Geographical area", ok: () => selected(elements.geoAreaDriver) },
+            { label: "Experience level", ok: () => checkedRadio("experienceLevelDriver") },
+            { label: "Income app(s)", ok: () => checkedAnyCheckbox("incomeAppsDriver") },
+            { label: "Manual or Automatic", ok: () => checkedRadio("bikeTypePreferenceDriver") },
+            { label: "Current bike model", ok: () => checkedRadio("currentBikeModelDriver") },
+
+            // Shared best bike from driver
+            { label: "Best bike for business", ok: () => selected(elements.bestBikeSelectDriver) },
+
+            // Mechanic unique (province/geo/experience hidden on mechanic UI)
+            { label: "Fix frequency", ok: () => checkedRadio("fixFrequency") },
+            { label: "Main issues", ok: () => checkedAnyCheckbox("mainIssues") },
+            { label: "Most fixed bike model", ok: () => checkedRadio("mostFixedBikeModel") },
+        ];
+    }
+
+    else if (role === "other") {
+        // Use driver as the shared base, then require owner+mechanic unique parts
+        checks = [
+            // Shared from DRIVER
+            { label: "Province", ok: () => selected(elements.provinceDriver) },
+            { label: "Geographical area", ok: () => selected(elements.geoAreaDriver) },
+            { label: "Experience level", ok: () => checkedRadio("experienceLevelDriver") },
+            { label: "Income app(s)", ok: () => checkedAnyCheckbox("incomeAppsDriver") },
+            { label: "Manual or Automatic", ok: () => checkedRadio("bikeTypePreferenceDriver") },
+            { label: "Current bike model", ok: () => checkedRadio("currentBikeModelDriver") },
+            { label: "Best bike for business", ok: () => selected(elements.bestBikeSelectDriver) },
+
+            // OWNER unique
+            { label: "Number of bikes rented out", ok: () => checkedRadio("numBikesRented") },
+            { label: "Rental option type", ok: () => checkedRadio("rentalOptionType") },
+            { label: "Rental price", ok: () => checkedRadio("rentalPrice") },
+            { label: "Average rental duration", ok: () => checkedRadio("avgRentalDuration") },
+            { label: "Longest rental period", ok: () => checkedRadio("longestRentalPeriod") },
+            { label: "Documentation of drivers", ok: () => selected(elements.documentationOfDriversSelect) },
+
+            // MECHANIC unique
+            { label: "Fix frequency", ok: () => checkedRadio("fixFrequency") },
+            { label: "Main issues", ok: () => checkedAnyCheckbox("mainIssues") },
+            { label: "Most fixed bike model", ok: () => checkedRadio("mostFixedBikeModel") },
         ];
     }
 
@@ -137,17 +374,18 @@ export function validateSection2(currentParticipantType, elements, state) {
         }
     }
 
-    // ✅ Toggle the actual button
-    if (elements && elements.nextButton2) {
-        elements.nextButton2.disabled = !isValid;
-        if (isValid) {
-            elements.nextButton2.classList.remove("opacity-50", "cursor-not-allowed");
-            elements.nextButton2.classList.add("hover:scale-105");
-        } else {
-            elements.nextButton2.classList.add("opacity-50", "cursor-not-allowed");
-            elements.nextButton2.classList.remove("hover:scale-105");
-        }
+    // ✅ Toggle BOTH Section 2 Next buttons (top + sticky)
+    document.querySelectorAll('[data-nav="next2"]').forEach((btn) => {
+    btn.disabled = !isValid;
+
+    if (isValid) {
+        btn.classList.remove("opacity-50", "cursor-not-allowed");
+        btn.classList.add("hover:scale-105");
+    } else {
+        btn.classList.add("opacity-50", "cursor-not-allowed");
+        btn.classList.remove("hover:scale-105");
     }
+    });
 
     // ✅ Show helpful message (optional)
     if (!isValid) showSection2Error(`Missing: ${firstMissing}`);

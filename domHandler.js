@@ -116,17 +116,33 @@ export function toggleNextButton1(participantType, nextButton1) {
 }
 
 export function hideAllQuestions(roleQuestionMap) {
-    Object.values(roleQuestionMap).forEach(id => {
-        const element = document.getElementById(id);
-        if (element) hideSection(element);
-    });
+  // Flatten roleQuestionMap values (strings or arrays) into one list of IDs
+  const allIds = new Set();
+  Object.values(roleQuestionMap).forEach((val) => {
+    if (Array.isArray(val)) val.forEach((id) => allIds.add(id));
+    else allIds.add(val);
+  });
+
+  allIds.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) hideSection(el);
+  });
 }
 
 export function showQuestionsForRole(role, roleQuestionMap) {
-    hideAllQuestions(roleQuestionMap);
-    const elementId = roleQuestionMap[role];
-    const element = document.getElementById(elementId);
-    if (element) showSection(element);
+  hideAllQuestions(roleQuestionMap);
+
+  const ids = roleQuestionMap[role];
+  if (!ids) return;
+
+  const list = Array.isArray(ids) ? ids : [ids];
+  list.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) showSection(el);
+  });
+
+  // After showing, hide duplicate questions for combo roles
+  applyComboRoleHiding(role);
 }
 
 function populateGeoAreas(provinceSelect, geoAreaSelect, validationCallback) {
@@ -281,4 +297,139 @@ export function clearAllErrors() {
     clearSectionError('section1');
     clearSectionError('section2');
     clearSectionError('section3');
+}
+
+function getQuestionWrapperByControlId(controlId) {
+  const el = document.getElementById(controlId);
+  if (!el) return null;
+
+  // Only allow hiding/showing a "question block":
+  // a div that is a DIRECT child of .space-y-8
+  const wrapper = el.closest('.space-y-8 > div');
+  return wrapper || null;
+}
+
+function hideQuestionByControlId(controlId) {
+  const wrapper = getQuestionWrapperByControlId(controlId);
+  if (!wrapper) return;
+  wrapper.classList.add('hidden-section');
+}
+
+function showQuestionByControlId(controlId) {
+  const wrapper = getQuestionWrapperByControlId(controlId);
+  if (!wrapper) return;
+  wrapper.classList.remove('hidden-section');
+}
+
+
+export function applyComboRoleHiding(role) {
+
+    const comboRoles = [
+    "driver_owner",
+    "mechanic_owner",
+    "driver_mechanic",
+    "other"
+    ];
+
+    const title = document.getElementById("section2Title");
+
+    if (comboRoles.includes(role)) {
+        if (title) title.textContent = "Required Questions";
+        setRoleHeadingsVisibility(false);
+    } else {
+        if (title) title.textContent = "Additional Questions";
+        setRoleHeadingsVisibility(true);
+    }
+
+  // First: reset (make sure everything visible again)
+  [
+    // owner common
+    "province_owner", "geo_area_owner", "exp_new_owner", "app_owner_uber_eats",
+    // owner best bike
+    "best_bike_for_business_owner_select",
+
+    // mechanic common
+    "province_mechanic", "geo_area_mechanic", "exp_new_mechanic",
+    // mechanic best bike (if you have it in mechanic section)
+    "best_bike_for_business_mechanic_select",
+  ].forEach(showQuestionByControlId);
+
+  if (role === "driver_owner") {
+    // Hide owner's duplicates (driver will supply shared)
+    ["province_owner", "geo_area_owner", "exp_new_owner", "app_owner_uber_eats", "best_bike_for_business_owner_select"]
+      .forEach(hideQuestionByControlId);
+  }
+
+  if (role === "mechanic_owner") {
+    // Hide owner's duplicates (mechanic will supply shared)
+    ["province_owner", "geo_area_owner", "exp_new_owner", "app_owner_uber_eats", "best_bike_for_business_owner_select"]
+      .forEach(hideQuestionByControlId);
+  }
+
+  if (role === "driver_mechanic") {
+    // Hide mechanic duplicates (driver supplies shared)
+    ["province_mechanic", "geo_area_mechanic", "exp_new_mechanic", "best_bike_for_business_mechanic_select"]
+      .forEach(hideQuestionByControlId);
+  }
+
+  if (role === "other") {
+    // All three: share from driver, so hide owner + mechanic duplicates
+    ["province_owner", "geo_area_owner", "exp_new_owner", "app_owner_uber_eats", "best_bike_for_business_owner_select"]
+      .forEach(hideQuestionByControlId);
+
+    ["province_mechanic", "geo_area_mechanic", "exp_new_mechanic", "best_bike_for_business_mechanic_select"]
+      .forEach(hideQuestionByControlId);
+  }
+
+  renumberSection2Questions();
+}
+
+function setRoleHeadingsVisibility(show) {
+  const headings = document.querySelectorAll(
+    '#driverQuestions > h3, #ownerQuestions > h3, #mechanicQuestions > h3'
+  );
+
+  headings.forEach(h => {
+    if (show) {
+      h.classList.remove('hidden-section');
+    } else {
+      h.classList.add('hidden-section');
+    }
+  });
+}
+
+export function renumberSection2Questions() {
+  // We only renumber "question cards" which are direct children of .space-y-8
+  const blocks = document.querySelectorAll(
+    '#driverQuestions .space-y-8 > div, ' +
+    '#ownerQuestions .space-y-8 > div, ' +
+    '#mechanicQuestions .space-y-8 > div'
+  );
+
+  // Keep only the blocks that are visible
+  const visibleBlocks = Array.from(blocks).filter(
+    (b) => !b.classList.contains('hidden-section')
+  );
+
+  let n = 1;
+
+  visibleBlocks.forEach((block) => {
+    // Grab ALL labels inside the block and pick the "question prompt" label.
+    // The prompt label is the one that starts with "number. " (e.g., "10. ...")
+    const labels = Array.from(block.querySelectorAll('label'));
+
+    const promptLabel = labels.find((lbl) =>
+      /^\s*\d+\.\s+/.test(lbl.textContent || "")
+    );
+
+    if (!promptLabel) return;
+
+    // Replace only the leading number part (e.g., "10. " -> "1. ")
+    promptLabel.textContent = promptLabel.textContent.replace(
+      /^\s*\d+\.\s+/,
+      `${n}. `
+    );
+
+    n += 1;
+  });
 }

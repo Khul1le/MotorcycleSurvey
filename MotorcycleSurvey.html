@@ -251,7 +251,7 @@
 
         <!-- Survey Section 2: Detailed Questions (initially hidden) -->
         <div id="section2" class="hidden-section">
-            <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">Additional Questions</h2>
+            <h2 id="section2Title" class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">Additional Questions</h2>
             <p class="text-lg text-gray-600 mb-8 text-center">
                 Please provide more details about your experience and preferences.
             </p>
@@ -858,27 +858,16 @@
                 </div>
 
                 <!-- Section 2 Navigation Buttons -->
-                <div class="mt-10 flex justify-between">
-                    <button id="backButton2"
-                        class="px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-200">
-                        Back
-                    </button>
 
-                    <button id="nextButton2"
-                        class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 opacity-50 cursor-not-allowed"
-                        disabled>
-                        Next
-                    </button>
-                </div>
             </div>
 
             <div class="sticky bottom-0 bg-white pt-4 mt-10 border-t border-gray-200 flex items-center justify-between gap-3 z-50">
-                <button id="backButton2"
+                <button type="button" id="backButton2" data-nav="back2"
                     class="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-200">
                     Back
                 </button>
 
-                <button id="nextButton2"
+                <button type="button" id="nextButton2" data-nav="next2"
                     class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 opacity-50 cursor-not-allowed"
                     disabled>
                     Next
@@ -1040,14 +1029,20 @@
 
                 <!-- Section 3 Navigation Buttons -->
                 <div class="mt-10 flex justify-between">
-                    <button id="backButton3"
-                        class="px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-200">
+                    <button
+                        type="button"
+                        id="backButton3"
+                        class="px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-200"
+                    >
                         Back
                     </button>
 
-                    <button id="submitButtonFinal"
-                        class="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 opacity-50 cursor-not-allowed"
-                        disabled>
+                    <button
+                        type="button"
+                        id="submitButtonFinal"
+                        class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 opacity-50 cursor-not-allowed"
+                        disabled
+                    >
                         Submit
                     </button>
                 </div>

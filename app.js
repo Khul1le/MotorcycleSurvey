@@ -1,6 +1,7 @@
 // --- app.js ---
 import * as DOM from './domHandler.js';
 import * as VALIDATION from './validation.js';
+import { collectSection2Data, collectSection3Data } from './validation.js';
 import { SurveyState, updateProgressBar } from './stateManager.js';
 
 const state = new SurveyState();
@@ -11,13 +12,16 @@ let elements = {};
 let liveValidationListenersAdded = false;
 
 const roleQuestionMap = {
-    driver: 'driverQuestions',
-    owner: 'ownerQuestions',
-    mechanic: 'mechanicQuestions',
-    driver_owner: 'driverOwnerQuestions',
-    mechanic_owner: 'mechanicOwnerQuestions',
-    driver_mechanic: 'driverMechanicQuestions',
-    other: 'driverQuestions'
+  driver: ['driverQuestions'],
+  owner: ['ownerQuestions'],
+  mechanic: ['mechanicQuestions'],
+
+  driver_owner: ['driverQuestions', 'ownerQuestions'],
+  mechanic_owner: ['mechanicQuestions', 'ownerQuestions'],
+  driver_mechanic: ['driverQuestions', 'mechanicQuestions'],
+
+  // "other" = all three (as per your label)
+  other: ['driverQuestions', 'ownerQuestions', 'mechanicQuestions'],
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -90,28 +94,30 @@ function setupInitialListeners() {
         });
     }
 
-    elements.nextButton1.addEventListener('click', () => {
-        if (!VALIDATION.validateSection1()) return;
+    if (elements.nextButton1) {
+            elements.nextButton1.addEventListener('click', () => {
+            if (!VALIDATION.validateSection1()) return;
 
-        DOM.showSection(elements.section2);
-        DOM.hideSection(elements.section1);
-        DOM.showQuestionsForRole(currentParticipantType, roleQuestionMap);
-        DOM.resetGeoAreas(elements);
+            DOM.showSection(elements.section2);
+            DOM.hideSection(elements.section1);
+            DOM.showQuestionsForRole(currentParticipantType, roleQuestionMap);
+            DOM.resetGeoAreas(elements);
 
-        // Make sure Next button in section 2 gets updated on entry
-        VALIDATION.validateSection2(currentParticipantType, elements, state);
+            // Make sure Next button in section 2 gets updated on entry
+            VALIDATION.validateSection2(currentParticipantType, elements, state);
 
-        updateProgressBar('section2');
-    });
+            updateProgressBar('section2');
+        });
+    }
 
-    elements.backButton2.addEventListener('click', () => {
+    /*elements.backButton2.addEventListener('click', () => {
         DOM.showSection(elements.section1);
         DOM.hideSection(elements.section2);
         DOM.hideAllQuestions(roleQuestionMap);
         updateProgressBar('section1');
-    });
+    });*/
 
-    elements.nextButton2.addEventListener('click', () => {
+    /*elements.nextButton2.addEventListener('click', () => {
         if (!VALIDATION.validateSection2(currentParticipantType, elements, state)) return;
 
         DOM.showSection(elements.section3);
@@ -121,22 +127,36 @@ function setupInitialListeners() {
         VALIDATION.validateSection3(elements, state);
 
         updateProgressBar('section3');
-    });
+    });*/
 
-    elements.backButton3.addEventListener('click', () => {
-        DOM.showSection(elements.section2);
-        DOM.hideSection(elements.section3);
-        updateProgressBar('section2');
+        if (elements.backButton3) {
+        elements.backButton3.addEventListener('click', () => {
+            DOM.showSection(elements.section2);
+            DOM.hideSection(elements.section3);
+            updateProgressBar('section2');
+            VALIDATION.validateSection2(currentParticipantType, elements, state);
+        });
+        }
 
-        // When going back, re-check section 2 validity (so Next button is correct)
-        VALIDATION.validateSection2(currentParticipantType, elements, state);
-    });
+        if (elements.submitButtonFinal) {
+            elements.submitButtonFinal.addEventListener('click', async (e) => {
+                e.preventDefault();
+                if (!VALIDATION.validateSection3(elements, state)) return;
 
-    elements.submitButtonFinal.addEventListener('click', async (e) => {
-        e.preventDefault();
-        if (!VALIDATION.validateSection3(elements, state)) return;
-        DOM.showSuccessModal();
-    });
+                const record = {
+                submittedAt: new Date().toISOString(),
+                participantType: currentParticipantType,
+                section2: VALIDATION.collectSection2Data(currentParticipantType, elements),
+                section3: VALIDATION.collectSection3Data(elements),
+                };
+
+                const existing = JSON.parse(localStorage.getItem("survey_records") || "[]");
+                existing.push(record);
+                localStorage.setItem("survey_records", JSON.stringify(existing));
+
+                DOM.showSuccessModal();
+            });
+        }
 }
 
 /**
@@ -177,4 +197,33 @@ function setupLiveValidationListeners() {
             el.addEventListener('input', () => VALIDATION.validateSection3(elements, state));
         }
     });
+
+    // ✅ Makes BOTH Section 2 button sets work (top + sticky)
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-nav]");
+  if (!btn) return;
+
+  const action = btn.getAttribute("data-nav");
+
+  if (action === "back2") {
+    DOM.showSection(elements.section1);
+    DOM.hideSection(elements.section2);
+    DOM.hideAllQuestions(roleQuestionMap);
+    updateProgressBar("section1");
+    return;
+  }
+
+  if (action === "next2") {
+    if (btn.disabled) return;
+    if (!VALIDATION.validateSection2(currentParticipantType, elements, state)) return;
+
+    DOM.showSection(elements.section3);
+    DOM.hideSection(elements.section2);
+
+    VALIDATION.validateSection3(elements, state);
+    updateProgressBar("section3");
+    return;
+  }
+});
+
 }
