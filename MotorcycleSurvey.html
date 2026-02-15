@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motorcycle Rental Market Research Survey</title>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
+            background-color: #f3f4f6;
         }
-        /* Custom styles for hidden sections */
-        .hidden-section {
-            display: none !important;
-        }
+        .hidden-section { display: none !important; }
         .section-container {
             border: 1px solid #e0e0e0;
             padding: 20px;
@@ -33,11 +32,9 @@
             background-size: 1.5rem 1.5rem;
             padding-right: 2.5rem;
         }
-        
+
         /* ===== PROGRESS BAR STYLES ===== */
-        .progress-container {
-            margin-bottom: 2rem;
-        }
+        .progress-container { margin-bottom: 2rem; }
         .progress-steps {
             display: flex;
             justify-content: space-between;
@@ -103,7 +100,7 @@
             color: #4f46e5;
             font-weight: 600;
         }
-        
+
         /* ===== ERROR STYLES ===== */
         .error {
             border-color: #ef4444 !important;
@@ -114,12 +111,10 @@
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
-        
+
         /* ===== SUCCESS STYLES ===== */
-        .success {
-            border-color: #10b981 !important;
-        }
-        
+        .success { border-color: #10b981 !important; }
+
         /* ===== LOADING SPINNER ===== */
         .spinner {
             border: 3px solid #f3f3f3;
@@ -135,16 +130,14 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
         /* ===== FADE ANIMATIONS ===== */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         /* ===== SUCCESS MODAL ===== */
         #successModal {
             position: fixed;
@@ -153,21 +146,18 @@
             right: 0;
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.5);
-            display: none;               /* IMPORTANT: default hidden */
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
-
-        /* Show modal only when we remove .hidden-section */
-        #successModal:not(.hidden-section) {
-            display: flex;
-        }
+        #successModal:not(.hidden-section) { display: flex; }
     </style>
 </head>
+
 <body class="min-h-screen p-4 sm:p-6 lg:p-8">
     <div class="bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-lg w-full max-w-2xl mx-auto border border-gray-200 fade-in">
-        
+
         <!-- Progress Bar -->
         <div class="progress-container">
             <div class="progress-steps">
@@ -187,59 +177,51 @@
             </div>
         </div>
 
-        <!-- Survey Section 1: Participant Type Selection -->
+        <!-- Survey Section 1 -->
         <div id="section1">
             <h1 class="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6">Motorcycle Rental Market Research</h1>
             <p class="text-lg text-gray-600 mb-8 text-center">
-                Thank you for participating in our survey! Your insights will help us understand the dynamic world of motorcycle renting and contribute to a valuable business publication.
-                Please select the category that best describes your primary involvement.
+                Thank you for participating. Your input will help us understand the motorcycle rental economy and will support a research publication.
+                Please choose the option that best describes your involvement.
             </p>
 
             <div class="space-y-4">
-                <!-- Category: People who are renting bikes (Drivers) -->
                 <label for="driver" class="flex items-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg cursor-pointer transition-all duration-200 border border-blue-200">
                     <input type="radio" id="driver" name="participantType" value="driver" class="form-radio h-5 w-5 text-blue-600 transition duration-150 ease-in-out focus:ring-blue-500">
-                    <span class="ml-4 text-lg font-medium text-gray-800">I drive rented motorcycles (as a driver/lessee).</span>
+                    <span class="ml-4 text-lg font-medium text-gray-800">I drive rented motorcycles (driver/lessee).</span>
                 </label>
 
-                <!-- Category: People who are renting out bikes (Owners/Lessors) -->
                 <label for="owner" class="flex items-center p-4 bg-green-50 hover:bg-green-100 rounded-lg cursor-pointer transition-all duration-200 border border-green-200">
                     <input type="radio" id="owner" name="participantType" value="owner" class="form-radio h-5 w-5 text-green-600 transition duration-150 ease-in-out focus:ring-green-500">
-                    <span class="ml-4 text-lg font-medium text-gray-800">I rent out motorcycles (as an owner/lessor).</span>
+                    <span class="ml-4 text-lg font-medium text-gray-800">I rent out motorcycles (owner/lessor).</span>
                 </label>
 
-                <!-- Category: Individuals who are mechanics -->
                 <label for="mechanic" class="flex items-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg cursor-pointer transition-all duration-200 border border-purple-200">
                     <input type="radio" id="mechanic" name="participantType" value="mechanic" class="form-radio h-5 w-5 text-purple-600 transition duration-150 ease-in-out focus:ring-purple-500">
                     <span class="ml-4 text-lg font-medium text-gray-800">I am a motorcycle mechanic.</span>
                 </label>
 
-                <!-- New Category: Driver and Owner -->
                 <label for="driver_owner" class="flex items-center p-4 bg-red-50 hover:bg-red-100 rounded-lg cursor-pointer transition-all duration-200 border border-red-200">
                     <input type="radio" id="driver_owner" name="participantType" value="driver_owner" class="form-radio h-5 w-5 text-red-600 transition duration-150 ease-in-out focus:ring-red-500">
-                    <span class="ml-4 text-lg font-medium text-gray-800">I do both - drive a motorcycle and rent out motorcycles.</span>
+                    <span class="ml-4 text-lg font-medium text-gray-800">I do both: I drive a motorcycle and I rent out motorcycles.</span>
                 </label>
 
-                <!-- New Category: Mechanic and Owner -->
                 <label for="mechanic_owner" class="flex items-center p-4 bg-teal-50 hover:bg-teal-100 rounded-lg cursor-pointer transition-all duration-200 border border-teal-200">
                     <input type="radio" id="mechanic_owner" name="participantType" value="mechanic_owner" class="form-radio h-5 w-5 text-teal-600 transition duration-150 ease-in-out focus:ring-teal-500">
-                    <span class="ml-4 text-lg font-medium text-gray-800">I do both - a motorcycle mechanic and rent out motorcycles.</span>
+                    <span class="ml-4 text-lg font-medium text-gray-800">I do both: I am a mechanic and I rent out motorcycles.</span>
                 </label>
 
-                <!-- New Category: Driver and Mechanic -->
                 <label for="driver_mechanic" class="flex items-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg cursor-pointer transition-all duration-200 border border-orange-200">
                     <input type="radio" id="driver_mechanic" name="participantType" value="driver_mechanic" class="form-radio h-5 w-5 text-orange-600 transition duration-150 ease-in-out focus:ring-orange-500">
-                    <span class="ml-4 text-lg font-medium text-gray-800">I do both - I drive a motorcycle and a mechanic.</span>
+                    <span class="ml-4 text-lg font-medium text-gray-800">I do both: I drive a motorcycle and I am a mechanic.</span>
                 </label>
 
-                <!-- Category: Other (e.g., store owners, combined roles) -->
                 <label for="other" class="flex items-center p-4 bg-yellow-50 hover:bg-yellow-100 rounded-lg cursor-pointer transition-all duration-200 border border-yellow-200">
                     <input type="radio" id="other" name="participantType" value="other" class="form-radio h-5 w-5 text-yellow-600 transition duration-150 ease-in-out focus:ring-yellow-500">
-                    <span class="ml-4 text-lg font-medium text-gray-800">Other (e.g., motorcycle store owner, hold all three roles, or a third-party service provider).</span>
+                    <span class="ml-4 text-lg font-medium text-gray-800">Other (e.g., store owner, all three roles, or related service provider).</span>
                 </label>
             </div>
 
-            <!-- Error message for section 1 -->
             <div id="section1Error" class="error-message hidden text-center mt-4"></div>
 
             <div class="mt-8 text-center">
@@ -249,23 +231,22 @@
             </div>
         </div>
 
-        <!-- Survey Section 2: Detailed Questions (initially hidden) -->
+        <!-- Survey Section 2 -->
         <div id="section2" class="hidden-section">
             <h2 id="section2Title" class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">Additional Questions</h2>
             <p class="text-lg text-gray-600 mb-8 text-center">
-                Please provide more details about your experience and preferences.
+                Please answer the questions below as accurately as possible.
             </p>
 
-            <!-- 🔴 Validation error message will appear here -->
             <div id="section2Error" class="error-message hidden text-center mt-4"></div>
 
-            <!-- Driver Specific Questions (initially hidden) -->
+            <!-- Driver Questions -->
             <div id="driverQuestions" class="hidden-section section-container">
                 <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Questions for Drivers</h3>
+
                 <div class="space-y-8">
-                    <!-- Question 1: Province -->
                     <div>
-                        <label for="province_driver" class="block text-xl font-semibold text-gray-700 mb-3">1. In which province are you primarily based?</label>
+                        <label for="province_driver" class="block text-xl font-semibold text-gray-700 mb-3">1. Which province are you primarily based in?</label>
                         <select id="province_driver" name="provinceDriver" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" required>
                             <option value="">Select your Province</option>
                             <option value="Eastern Cape">Eastern Cape</option>
@@ -280,36 +261,33 @@
                         </select>
                     </div>
 
-                    <!-- Question 2: Geographical Area (initially disabled) -->
                     <div>
-                        <label for="geo_area_driver" class="block text-xl font-semibold text-gray-700 mb-3">2. Which geographical area best describes your primary operational region?</label>
+                        <label for="geo_area_driver" class="block text-xl font-semibold text-gray-700 mb-3">2. Which area best describes where you work most often?</label>
                         <select id="geo_area_driver" name="geoAreaDriver" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled required>
                             <option value="">Select an Area</option>
                         </select>
                     </div>
 
-                    <!-- Question 3: Experience Level -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">3. How much experience do you have as a driver?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">3. How long have you worked as a delivery/rental motorcycle driver?</label>
                         <div class="space-y-2">
                             <label for="exp_new_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_new_driver" name="experienceLevelDriver" value="1_year_less" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
-                                <span class="ml-3 text-base text-gray-700">1 year or less (New to the business)</span>
+                                <span class="ml-3 text-base text-gray-700">1 year or less</span>
                             </label>
                             <label for="exp_medium_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_medium_driver" name="experienceLevelDriver" value="1_3_years" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">1 to 3 years (Knows the business)</span>
+                                <span class="ml-3 text-base text-gray-700">1 to 3 years</span>
                             </label>
                             <label for="exp_experienced_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_experienced_driver" name="experienceLevelDriver" value="3_years_plus" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">3 years+ (Experienced)</span>
+                                <span class="ml-3 text-base text-gray-700">3+ years</span>
                             </label>
                         </div>
                     </div>
 
-                    <!-- Question 4: Apps used for income (Driver) -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">4. Which app(s) do you primarily use to generate income?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">4. Which delivery app(s) do you mainly use to earn income? (Select all that apply)</label>
                         <div class="space-y-2">
                             <label for="app_uber_eats_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_uber_eats_driver" name="incomeAppsDriver" value="uber_eats" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
@@ -333,7 +311,7 @@
                             </label>
                             <label for="app_picnpay_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_picnpay_driver" name="incomeAppsDriver" value="picnpay_delivery" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Pic 'n Pay</span>
+                                <span class="ml-3 text-base text-gray-700">Pick n Pay</span>
                             </label>
                             <label for="app_woolworths_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_woolworths_driver" name="incomeAppsDriver" value="woolworths_delivery" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
@@ -341,15 +319,14 @@
                             </label>
                             <label for="app_other_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_other_driver" name="incomeAppsDriver" value="other_delivery" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Another delivery application (please specify)</span>
+                                <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
                             </label>
                             <input type="text" id="otherAppSpecifyDriver" name="otherAppSpecifyDriver" placeholder="e.g., Bolt Food" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
                         </div>
                     </div>
 
-                    <!-- Question 5: Manual or Automatic Bike Preference (Driver) -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">5. Do you prefer using a manual or automatic motorcycle?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">5. Which type of motorcycle do you prefer for this work?</label>
                         <div class="space-y-2">
                             <label for="bike_manual_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="bike_manual_driver" name="bikeTypePreferenceDriver" value="manual" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -362,9 +339,8 @@
                         </div>
                     </div>
 
-                    <!-- Question 6: Current Bike Model (Driver) -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">6. What motorcycle model are you currently using?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">6. Which motorcycle model are you currently using?</label>
                         <div class="space-y-2">
                             <label for="model_velocity_driver" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="model_velocity_driver" name="currentBikeModelDriver" value="big_boy_velocity" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -398,9 +374,8 @@
                         </div>
                     </div>
 
-                    <!-- New Question 7: How often do they change bikes? -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">7. How often do you change the motorcycles you drive?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">7. How often do you change the motorcycle you drive for work?</label>
                         <div class="space-y-2">
                             <label for="change_bike_weekly" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="change_bike_weekly" name="bikeChangeFrequency" value="Every week" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -424,14 +399,13 @@
                             </label>
                             <label for="change_bike_6_months_plus" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="change_bike_6_months_plus" name="bikeChangeFrequency" value="6 months+" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">6 months+</span>
+                                <span class="ml-3 text-base text-gray-700">6+ months</span>
                             </label>
                         </div>
                     </div>
 
-                    <!-- New Question 8: Consistently Cash Up -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">8. Do you always cash up money consistently to your Owner?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">8. Do you consistently pay your agreed weekly amount to the owner?</label>
                         <div class="space-y-2">
                             <label for="cash_up_yes" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="cash_up_yes" name="cashUpConsistently" value="Yes" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -444,9 +418,8 @@
                         </div>
                     </div>
 
-                    <!-- New Question 9: Rent to Buy Option -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">9. Have you ever done a rent-to-buy option for a motorcycle?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">9. Have you ever used a rent-to-buy arrangement for a motorcycle?</label>
                         <div class="space-y-2">
                             <label for="rent_to_buy_yes" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="rent_to_buy_yes" name="rentToBuyOption" value="Yes" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -459,9 +432,8 @@
                         </div>
                     </div>
 
-                    <!-- Question 10: Best Motorcycle for Business (Driver) - NOW A SELECT LIST -->
                     <div>
-                        <label for="best_bike_for_business_driver_select" class="block text-xl font-semibold text-gray-700 mb-3">10. In your opinion, what is the best motorcycle for this business (from a driver's perspective)?</label>
+                        <label for="best_bike_for_business_driver_select" class="block text-xl font-semibold text-gray-700 mb-3">10. From a driver’s perspective, which motorcycle model is best for this business?</label>
                         <select id="best_bike_for_business_driver_select" name="bestBikeForBusinessDriverSelect" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" required>
                             <option value="">Select a Motorcycle Model</option>
                             <option value="Big Boy Velocity">Big Boy Velocity</option>
@@ -472,20 +444,22 @@
                             <option value="Yamaha">Yamaha</option>
                             <option value="Other">Other (please specify)</option>
                         </select>
+
                         <input type="text" id="otherBestBikeSpecifyDriver" name="otherBestBikeSpecifyDriver" placeholder="e.g., KTM Duke 200" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
-                        <label for="best_bike_for_business_driver_reason" class="block text-xl font-semibold text-gray-700 mt-4 mb-3">Why? [Don't have to explain - but if you can please do]?</label>
-                        <textarea id="best_bike_for_business_driver_reason" name="bestBikeForBusinessDriverReason" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" placeholder="Explain your reasons for choosing this motorcycle."></textarea>
+
+                        <label for="best_bike_for_business_driver_reason" class="block text-xl font-semibold text-gray-700 mt-4 mb-3">Why? (Optional)</label>
+                        <textarea id="best_bike_for_business_driver_reason" name="bestBikeForBusinessDriverReason" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" placeholder="If you’d like, explain your choice..."></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Owner Specific Questions (initially hidden) -->
+            <!-- Owner Questions -->
             <div id="ownerQuestions" class="hidden-section section-container">
                 <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Questions for Owners</h3>
+
                 <div class="space-y-8">
-                    <!-- Question 1: Province -->
                     <div>
-                        <label for="province_owner" class="block text-xl font-semibold text-gray-700 mb-3">1. In which province are you primarily based?</label>
+                        <label for="province_owner" class="block text-xl font-semibold text-gray-700 mb-3">1. Which province are you primarily based in?</label>
                         <select id="province_owner" name="provinceOwner" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" required>
                             <option value="">Select your Province</option>
                             <option value="Eastern Cape">Eastern Cape</option>
@@ -500,62 +474,59 @@
                         </select>
                     </div>
 
-                    <!-- Question 2: Geographical Area (initially disabled) -->
                     <div>
-                        <label for="geo_area_owner" class="block text-xl font-semibold text-gray-700 mb-3">2. Which geographical area best describes your primary operational region?</label>
+                        <label for="geo_area_owner" class="block text-xl font-semibold text-gray-700 mb-3">2. Which area best describes where you operate most often?</label>
                         <select id="geo_area_owner" name="geoAreaOwner" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled required>
                             <option value="">Select an Area</option>
                         </select>
                     </div>
 
-                    <!-- Question 3: Experience Level (Owner) -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">3. How much experience do you have as an owner/lessor?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">3. How long have you been renting out motorcycles?</label>
                         <div class="space-y-2">
                             <label for="exp_new_owner" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_new_owner" name="experienceLevelOwner" value="1_year_less" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
-                                <span class="ml-3 text-base text-gray-700">1 year or less (New to the business)</span>
+                                <span class="ml-3 text-base text-gray-700">1 year or less</span>
                             </label>
                             <label for="exp_medium_owner" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_medium_owner" name="experienceLevelOwner" value="1_3_years" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">1 to 3 years (Knows the business)</span>
+                                <span class="ml-3 text-base text-gray-700">1 to 3 years</span>
                             </label>
                             <label for="exp_experienced_owner" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_experienced_owner" name="experienceLevelOwner" value="3_years_plus" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">3 years+ (Experienced)</span>
+                                <span class="ml-3 text-base text-gray-700">3+ years</span>
                             </label>
                         </div>
                     </div>
 
-                    <!-- Question 4: Apps used for income (Owner) -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">4. Which app(s) have/are your drivers used?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">4. Which platform(s) do your drivers typically work on? (Select all that apply)</label>
                         <div class="space-y-2">
                             <label for="app_owner_uber_eats" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_owner_uber_eats" name="incomeAppsOwner" value="uber_eats" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Uber Eats (as a platform for drivers)</span>
+                                <span class="ml-3 text-base text-gray-700">Uber Eats</span>
                             </label>
                             <label for="app_owner_mr_d" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_owner_mr_d" name="incomeAppsOwner" value="mr_d" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Mr. D (as a platform for drivers)</span>
+                                <span class="ml-3 text-base text-gray-700">Mr. D</span>
                             </label>
                             <label for="app_owner_zulzi" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_owner_zulzi" name="incomeAppsOwner" value="zulzi" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Zulzi (as a platform for drivers)</span>
+                                <span class="ml-3 text-base text-gray-700">Zulzi</span>
                             </label>
                             <label for="app_owner_picup" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_owner_picup" name="incomeAppsOwner" value="picup" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Picup (as a platform for drivers)</span>
+                                <span class="ml-3 text-base text-gray-700">Picup</span>
                             </label>
                             <label for="app_owner_boltfood" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_owner_boltfood" name="incomeAppsOwner" value="boltfood" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Bolt Food (as a platform for drivers)</span>
+                                <span class="ml-3 text-base text-gray-700">Bolt Food</span>
                             </label>
                             <label for="app_owner_other" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="app_owner_other" name="incomeAppsOwner" value="other_delivery" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Another delivery application or rental platform (please specify)</span>
+                                <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
                             </label>
-                            <input type="text" id="otherAppSpecifyOwner" name="otherAppSpecifyOwner" placeholder="e.g., dedicated rental app, Facebook Marketplace" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
+                            <input type="text" id="otherAppSpecifyOwner" name="otherAppSpecifyOwner" placeholder="e.g., a rental platform / Facebook" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
                         </div>
                     </div>
 
@@ -582,15 +553,15 @@
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">6. Do you primarily offer motorcycles for rent only, or do you also offer rent-to-buy options?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">6. Which rental option do you offer most?</label>
                         <div class="space-y-2">
                             <label for="offer_rent_only" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="offer_rent_only" name="rentalOptionType" value="rent_only" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
-                                <span class="ml-3 text-base text-gray-700">Rent Only</span>
+                                <span class="ml-3 text-base text-gray-700">Rent only</span>
                             </label>
                             <label for="offer_rent_to_buy" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="offer_rent_to_buy" name="rentalOptionType" value="rent_to_buy" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Rent-to-Buy</span>
+                                <span class="ml-3 text-base text-gray-700">Rent-to-buy</span>
                             </label>
                             <label for="offer_both_options" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="offer_both_options" name="rentalOptionType" value="both" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
@@ -600,7 +571,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">7. What is the typical weekly rental price for your motorcycles?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">7. What is the typical weekly rental price you charge per motorcycle?</label>
                         <div class="space-y-2">
                             <label for="price_less_500" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="price_less_500" name="rentalPrice" value="<R500" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -629,8 +600,9 @@
                         </div>
                     </div>
 
+                    <!-- THIS WAS YOUR "DURATION PERIODS" QUESTION - NOW CLARIFIED -->
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">8. What are the typical duration periods you rent bikes to drivers?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">8. On average, how long does a driver keep the same motorcycle before returning or changing it?</label>
                         <div class="space-y-2">
                             <label for="duration_less_1m" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="duration_less_1m" name="avgRentalDuration" value="<1_month" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -650,13 +622,13 @@
                             </label>
                             <label for="duration_12m_plus" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="duration_12m_plus" name="avgRentalDuration" value="12_months_plus" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">12 months+</span>
+                                <span class="ml-3 text-base text-gray-700">12+ months</span>
                             </label>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">9. What is the longest you have rented one bike to a driver?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">9. What is the longest time you have rented the same motorcycle to one driver?</label>
                         <div class="space-y-2">
                             <label for="longest_0_3m" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="longest_0_3m" name="longestRentalPeriod" value="0_3_months" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -682,23 +654,25 @@
                     </div>
 
                     <div>
-                        <label for="Documentation_Of_Drivers" class="block text-xl font-semibold text-gray-700 mb-3">10. The documentation from drivers do you request to be able to trust them with your bike?</label>
+                        <label for="Documentation_Of_Drivers" class="block text-xl font-semibold text-gray-700 mb-3">10. What documents do you usually request from drivers before renting them a motorcycle?</label>
                         <select id="Documentation_Of_Drivers" name="DocumentationOfDrivers" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" required>
-                            <option value="Docs">What documentation from drivers do you ask for?</option>
+                            <option value="Docs">Select the documentation you ask for</option>
                             <option value="None">None</option>
-                            <option value="Passport/Asylum/ID">Passport/Asylum/ID</option>
-                            <option value="Proof Of Address">Proof Of Address</option>
-                            <option value="Trafic Register">Trafic Register</option>
-                            <option value="All Of Above">All Of Above</option>
+                            <option value="Passport/Asylum/ID">Passport / Asylum / ID</option>
+                            <option value="Proof Of Address">Proof of address</option>
+                            <option value="Trafic Register">Traffic Register</option>
+                            <option value="All Of Above">All of the above</option>
                             <option value="Other">Other (please specify)</option>
                         </select>
+
                         <input type="text" id="otherBestBikeSpecifyOwnerDO" name="otherBestBikeSpecifyOwnerDO" placeholder="e.g., Affidavit" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
-                        <label for="documentation_reason" class="block text-xl font-semibold text-gray-700 mt-4 mb-3">Why? [Don't have to explain - but if you can please do]?</label>
-                        <textarea id="documentation_reason" name="documentationreason" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" placeholder="Explain your reasons for asking for these documents"></textarea>
+
+                        <label for="documentation_reason" class="block text-xl font-semibold text-gray-700 mt-4 mb-3">Why? (Optional)</label>
+                        <textarea id="documentation_reason" name="documentationreason" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" placeholder="If you’d like, explain why you ask for these documents..."></textarea>
                     </div>
 
                     <div>
-                        <label for="best_bike_for_business_owner_select" class="block text-xl font-semibold text-gray-700 mb-3">11. In your opinion, what is the best motorcycle for this business (from an owner's perspective)?</label>
+                        <label for="best_bike_for_business_owner_select" class="block text-xl font-semibold text-gray-700 mb-3">11. From an owner’s perspective, which motorcycle model is best for this business?</label>
                         <select id="best_bike_for_business_owner_select" name="bestBikeForBusinessOwnerSelect" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" required>
                             <option value="">Select a Motorcycle Model</option>
                             <option value="Big Boy Velocity">Big Boy Velocity</option>
@@ -709,18 +683,22 @@
                             <option value="Yamaha">Yamaha</option>
                             <option value="Other">Other (please specify)</option>
                         </select>
+
                         <input type="text" id="otherBestBikeSpecifyOwner" name="otherBestBikeSpecifyOwner" placeholder="e.g., Bajaj Pulsar" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
-                        <label for="best_bike_for_business_owner_reason" class="block text-xl font-semibold text-gray-700 mt-4 mb-3">Why? [Don't have to explain - but if you can please do]</label>
-                        <textarea id="best_bike_for_business_owner_reason" name="bestBikeForBusinessOwnerReason" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" placeholder="Explain your reasons for choosing this motorcycle."></textarea>
+
+                        <label for="best_bike_for_business_owner_reason" class="block text-xl font-semibold text-gray-700 mt-4 mb-3">Why? (Optional)</label>
+                        <textarea id="best_bike_for_business_owner_reason" name="bestBikeForBusinessOwnerReason" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" placeholder="If you’d like, explain your choice..."></textarea>
                     </div>
                 </div>
             </div>
 
+            <!-- Mechanic Questions -->
             <div id="mechanicQuestions" class="hidden-section section-container">
                 <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Questions for Mechanics</h3>
+
                 <div class="space-y-8">
                     <div>
-                        <label for="province_mechanic" class="block text-xl font-semibold text-gray-700 mb-3">1. In which province are you primarily based?</label>
+                        <label for="province_mechanic" class="block text-xl font-semibold text-gray-700 mb-3">1. Which province are you primarily based in?</label>
                         <select id="province_mechanic" name="provinceMechanic" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" required>
                             <option value="">Select your Province</option>
                             <option value="Eastern Cape">Eastern Cape</option>
@@ -736,32 +714,32 @@
                     </div>
 
                     <div>
-                        <label for="geo_area_mechanic" class="block text-xl font-semibold text-gray-700 mb-3">2. Which geographical area best describes your primary operational region?</label>
+                        <label for="geo_area_mechanic" class="block text-xl font-semibold text-gray-700 mb-3">2. Which area best describes where you work most often?</label>
                         <select id="geo_area_mechanic" name="geoAreaMechanic" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled required>
                             <option value="">Select an Area</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">3. How much experience do you have as a motorcycle mechanic?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">3. How long have you worked as a motorcycle mechanic?</label>
                         <div class="space-y-2">
                             <label for="exp_new_mechanic" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_new_mechanic" name="experienceLevelMechanic" value="1_year_less" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
-                                <span class="ml-3 text-base text-gray-700">1 year or less (New to the business)</span>
+                                <span class="ml-3 text-base text-gray-700">1 year or less</span>
                             </label>
                             <label for="exp_medium_mechanic" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_medium_mechanic" name="experienceLevelMechanic" value="1_3_years" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">1 to 3 years (Knows the business)</span>
+                                <span class="ml-3 text-base text-gray-700">1 to 3 years</span>
                             </label>
                             <label for="exp_experienced_mechanic" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="exp_experienced_mechanic" name="experienceLevelMechanic" value="3_years_plus" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">3 years+ (Experienced)</span>
+                                <span class="ml-3 text-base text-gray-700">3+ years</span>
                             </label>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">4. How often do you fix/service the same type of bike in a month?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">4. About how many times per month do you service or repair this type of motorcycle?</label>
                         <div class="space-y-2">
                             <label for="fix_freq_1_3" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="fix_freq_1_3" name="fixFrequency" value="1-3" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -783,30 +761,30 @@
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">5. What are the main issues you usually fix/service?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">5. What types of issues do you fix most often? (Select all that apply)</label>
                         <div class="space-y-2">
                             <label for="issue_minor" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="issue_minor" name="mainIssues" value="minor" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Minor issues (e.g., oil change, gear lever adjustment, new brake cable)</span>
+                                <span class="ml-3 text-base text-gray-700">Minor issues (e.g., oil change, gear lever adjustment, brake cable)</span>
                             </label>
                             <label for="issue_medium" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="issue_medium" name="mainIssues" value="medium" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Medium issues (e.g., sprocket/chain replacement, carburetor cleaning, clutch adjustment)</span>
+                                <span class="ml-3 text-base text-gray-700">Medium issues (e.g., sprocket/chain, carburetor cleaning, clutch adjustment)</span>
                             </label>
                             <label for="issue_major" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="issue_major" name="mainIssues" value="major" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="ml-3 text-base text-gray-700">Major issues (e.g., engine tappets, crankshaft repair, full engine overhaul)</span>
+                                <span class="ml-3 text-base text-gray-700">Major issues (e.g., crankshaft repair, engine overhaul)</span>
                             </label>
                             <label for="issue_other" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="checkbox" id="issue_other" name="mainIssues" value="other" class="form-checkbox h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500">
                                 <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
                             </label>
-                            <input type="text" id="otherIssueSpecify" name="otherIssueSpecify" placeholder="e.g., electrical faults, tire punctures" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
+                            <input type="text" id="otherIssueSpecify" name="otherIssueSpecify" placeholder="e.g., electrical faults, punctures" class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base" disabled>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-gray-700 mb-3">6. What motorcycle model do you fix the most?</label>
+                        <label class="block text-xl font-semibold text-gray-700 mb-3">6. Which motorcycle model do you repair most often?</label>
                         <div class="space-y-2">
                             <label for="model_velocity_mechanic" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                                 <input type="radio" id="model_velocity_mechanic" name="mostFixedBikeModel" value="big_boy_velocity" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500" required>
@@ -841,8 +819,8 @@
                     </div>
 
                     <div>
-                                            <label for="best_bike_for_business_mechanic_dm_select" class="block text-xl font-semibold text-gray-700 mb-3">
-                            7. Which motorcycle is best for business? (Mechanic perspective)
+                        <label for="best_bike_for_business_mechanic_dm_select" class="block text-xl font-semibold text-gray-700 mb-3">
+                            7. From a mechanic’s perspective, which motorcycle model is best for this business?
                         </label>
                         <select id="best_bike_for_business_mechanic_dm_select" name="bestBikeMechanicDM"
                             class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base"
@@ -856,11 +834,9 @@
                             disabled>
                     </div>
                 </div>
-
-                <!-- Section 2 Navigation Buttons -->
-
             </div>
 
+            <!-- Section 2 Nav -->
             <div class="sticky bottom-0 bg-white pt-4 mt-10 border-t border-gray-200 flex items-center justify-between gap-3 z-50">
                 <button type="button" id="backButton2" data-nav="back2"
                     class="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-200">
@@ -880,7 +856,6 @@
             <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">Final Questions</h2>
 
             <div class="section-container space-y-8">
-                <!-- Nationality -->
                 <div>
                     <label class="block text-xl font-semibold text-gray-700 mb-3">1. Are you South African?</label>
                     <div class="space-y-2">
@@ -895,9 +870,8 @@
                     </div>
                 </div>
 
-                <!-- Monthly income -->
                 <div>
-                    <label class="block text-xl font-semibold text-gray-700 mb-3">2. What is your monthly income?</label>
+                    <label class="block text-xl font-semibold text-gray-700 mb-3">2. What is your approximate monthly income?</label>
                     <div class="space-y-2">
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="monthlyIncome" value="0-5000" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
@@ -918,9 +892,8 @@
                     </div>
                 </div>
 
-                <!-- Monthly expense -->
                 <div>
-                    <label class="block text-xl font-semibold text-gray-700 mb-3">3. What are your monthly expenses?</label>
+                    <label class="block text-xl font-semibold text-gray-700 mb-3">3. What are your approximate monthly expenses?</label>
                     <div class="space-y-2">
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="monthlyExpense" value="0-5000" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
@@ -941,36 +914,34 @@
                     </div>
                 </div>
 
-                <!-- Business risk -->
                 <div>
-                    <label class="block text-xl font-semibold text-gray-700 mb-3">4. Rate the risk of this business.</label>
+                    <label class="block text-xl font-semibold text-gray-700 mb-3">4. Overall, how risky do you think this business is?</label>
                     <div class="space-y-2">
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="businessRisk" value="0/10" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Risk-Free (0/10)</span>
+                            <span class="ml-3 text-base text-gray-700">Risk-free (0/10)</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="businessRisk" value="1-3/10" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Small Risk (1-3/10)</span>
+                            <span class="ml-3 text-base text-gray-700">Low risk (1–3/10)</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="businessRisk" value="4-6/10" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Neutral Risk (4-6/10)</span>
+                            <span class="ml-3 text-base text-gray-700">Medium risk (4–6/10)</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="businessRisk" value="7-9/10" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Risky (7-9/10)</span>
+                            <span class="ml-3 text-base text-gray-700">High risk (7–9/10)</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="businessRisk" value="9+/10" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Very Risky (9+/10)</span>
+                            <span class="ml-3 text-base text-gray-700">Very high risk (9+/10)</span>
                         </label>
                     </div>
                 </div>
 
-                <!-- Recommend business -->
                 <div>
-                    <label class="block text-xl font-semibold text-gray-700 mb-3">5. Would you recommend this business?</label>
+                    <label class="block text-xl font-semibold text-gray-700 mb-3">5. Would you recommend this business to someone you care about?</label>
                     <div class="space-y-2">
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="radio" name="recommendBusiness" value="Yes" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
@@ -983,29 +954,28 @@
                     </div>
                 </div>
 
-                <!-- Biggest issues -->
                 <div>
-                    <label class="block text-xl font-semibold text-gray-700 mb-3">6. What are the biggest issues in the business?</label>
+                    <label class="block text-xl font-semibold text-gray-700 mb-3">6. What do you think are the biggest challenges in this business? (Select all that apply)</label>
                     <div class="space-y-2">
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" name="biggestIssues" value="Crime High - Theft" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Crime High - High chance of motorcycle theft</span>
+                            <span class="ml-3 text-base text-gray-700">High risk of theft / crime</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" name="biggestIssues" value="Unreliable Drivers - No Cash Up" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Not easy to find reliable drivers - don't cash up money</span>
+                            <span class="ml-3 text-base text-gray-700">Hard to find reliable drivers (late / no cash-up)</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" name="biggestIssues" value="Unreliable Drivers - Crashing" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Not easy to find reliable drivers - always crashing bike</span>
+                            <span class="ml-3 text-base text-gray-700">Hard to find reliable drivers (accidents / damage)</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" name="biggestIssues" value="Not Enough Money Generated" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Not enough money is generated</span>
+                            <span class="ml-3 text-base text-gray-700">Income is not high enough</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" name="biggestIssues" value="Too Many Motorcycle Issues - Expensive Fixing" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Too many issues with motorcycles - makes fixing expensive</span>
+                            <span class="ml-3 text-base text-gray-700">Repairs are frequent and expensive</span>
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" name="biggestIssues" value="Unreliable Mechanics" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
@@ -1013,13 +983,14 @@
                         </label>
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" name="biggestIssues" value="Too Many Bikes on the Road" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                            <span class="ml-3 text-base text-gray-700">Too many bikes on the road (competition)</span>
+                            <span class="ml-3 text-base text-gray-700">Too much competition (too many bikes on the road)</span>
                         </label>
 
                         <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
                             <input type="checkbox" id="issue_other_specify" name="biggestIssues" value="Other" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
                             <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
                         </label>
+
                         <input type="text" id="otherIssueSpecifyFinal" name="otherIssueSpecifyFinal"
                             placeholder="If Other, please specify..."
                             class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base"
@@ -1027,7 +998,312 @@
                     </div>
                 </div>
 
-                <!-- Section 3 Navigation Buttons -->
+                <!-- NEW Q7 -->
+                <div>
+                <label class="block text-xl font-semibold text-gray-700 mb-3">
+                    7. Which delivery app/platform currently allows motorcycle drivers to earn the most overall?
+                    <span class="block text-sm font-normal text-gray-500 mt-1">(Select all that apply)</span>
+                </label>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Uber Eats" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Uber Eats</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Mr D" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Mr D</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Zulzi" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Zulzi</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Picup" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Picup</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Bolt Food" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Bolt Food</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Checkers Sixty60" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Checkers Sixty60</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Pick n Pay" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Pick n Pay</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="bestEarningPlatforms" value="Woolworths" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Woolworths</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" id="best_platform_other" name="bestEarningPlatforms" value="Other" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
+                    </label>
+
+                    <input
+                    type="text"
+                    id="bestPlatformOtherSpecify"
+                    name="bestPlatformOtherSpecify"
+                    placeholder="If Other, please specify..."
+                    class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base"
+                    disabled
+                    >
+                </div>
+                </div>
+
+                <!-- NEW Q8 -->
+                <div>
+                <label class="block text-xl font-semibold text-gray-700 mb-3">
+                    8. In your opinion, which motorcycle rental business model works best overall?
+                </label>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="bestRentalModel" value="Rent-only" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Rent-only</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="bestRentalModel" value="Rent-to-buy" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Rent-to-buy</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="bestRentalModel" value="Both" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">A combination of both</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="bestRentalModel" value="Depends" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">It depends on the situation</span>
+                    </label>
+                </div>
+                </div>
+
+                <!-- NEW Q9 -->
+                <div>
+                <label class="block text-xl font-semibold text-gray-700 mb-3">
+                    9. How do you usually find new drivers/customers or rental opportunities?
+                    <span class="block text-sm font-normal text-gray-500 mt-1">(Select all that apply)</span>
+                </label>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="findOpportunities" value="Word of mouth" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Word of mouth</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="findOpportunities" value="WhatsApp groups" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">WhatsApp groups</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="findOpportunities" value="Social media" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Social media (Facebook/WhatsApp/etc.)</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="findOpportunities" value="Online platforms" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Online platforms (OLX/Gumtree/etc.)</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" name="findOpportunities" value="Through an agent" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Through an agent / middleman</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="checkbox" id="find_other" name="findOpportunities" value="Other" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
+                    </label>
+
+                    <input
+                    type="text"
+                    id="findOtherSpecify"
+                    name="findOtherSpecify"
+                    placeholder="If Other, please specify..."
+                    class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base"
+                    disabled
+                    >
+                </div>
+                </div>
+
+                <!-- NEW Q10 -->
+                <div>
+                <label class="block text-xl font-semibold text-gray-700 mb-3">
+                    10. What is the single most important factor when choosing a motorcycle for business use?
+                </label>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="mostImportantFactor" value="Purchase price" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Purchase price</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="mostImportantFactor" value="Fuel efficiency" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Fuel efficiency</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="mostImportantFactor" value="Reliability" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Reliability</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="mostImportantFactor" value="Availability of parts" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Availability/cost of parts</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="mostImportantFactor" value="Brand reputation" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Brand reputation</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" id="factor_other" name="mostImportantFactor" value="Other" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
+                    </label>
+
+                    <input
+                    type="text"
+                    id="factorOtherSpecify"
+                    name="factorOtherSpecify"
+                    placeholder="If Other, please specify..."
+                    class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base"
+                    disabled
+                    >
+                </div>
+                </div>
+
+                <!-- NEW Q11 -->
+                <div>
+                <label class="block text-xl font-semibold text-gray-700 mb-3">
+                    11. What is the biggest challenge you face when trying to grow this business?
+                </label>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="growthChallenge" value="Too much competition" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Too much competition</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="growthChallenge" value="Not enough marketing" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Not enough marketing/visibility</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="growthChallenge" value="High operating costs" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">High operating costs</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="growthChallenge" value="Lack of reliable customers" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Difficulty finding reliable drivers/customers</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" id="growth_other" name="growthChallenge" value="Other" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Other (please specify)</span>
+                    </label>
+
+                    <input
+                    type="text"
+                    id="growthOtherSpecify"
+                    name="growthOtherSpecify"
+                    placeholder="If Other, please specify..."
+                    class="mt-2 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base"
+                    disabled
+                    >
+                </div>
+                </div>
+
+                <!-- NEW Q12 -->
+                <div>
+                <label class="block text-xl font-semibold text-gray-700 mb-3">
+                    12. Compared to one year ago, how has this business changed overall?
+                </label>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="businessChangeLastYear" value="Improved" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Improved</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="businessChangeLastYear" value="Declined" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Declined</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="businessChangeLastYear" value="Stayed the same" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Stayed about the same</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="businessChangeLastYear" value="Fluctuates a lot" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Very inconsistent / fluctuates a lot</span>
+                    </label>
+                </div>
+                </div>
+
+                <!-- NEW Q13 (Your #8) -->
+                <div>
+                <label class="block text-xl font-semibold text-gray-700 mb-3">
+                    13. If you had extra capital available, would you invest more into this business?
+                </label>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="investMore" value="Yes" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Yes</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="investMore" value="No" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">No</span>
+                    </label>
+
+                    <label class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer transition-all duration-200 border border-gray-200">
+                    <input type="radio" name="investMore" value="Maybe/Depends" class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-3 text-base text-gray-700">Maybe / depends on conditions</span>
+                    </label>
+                </div>
+                </div>
+
+                <!-- PHONE (required - used to prevent duplicate submissions) -->
+                <div>
+                    <label for="phoneNumber" class="block text-xl font-semibold text-gray-700 mb-3">
+                        14. Your current phone number 
+                        <span class="block text-sm font-normal text-gray-500 mt-1">(Will Not Be Shared Or Used)</span>
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        placeholder="e.g. 0812345678 or +27812345678"
+                        class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 text-base"
+                        autocomplete="tel"
+                        required
+                    />
+
+                    <div id="phoneError" class="error-message hidden"></div>
+                </div>
+
                 <div class="mt-10 flex justify-between">
                     <button
                         type="button"

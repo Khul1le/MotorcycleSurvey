@@ -14,6 +14,18 @@ export class SurveyState {
         };
     }
 
+    hasSubmittedBefore() {
+        return localStorage.getItem("survey_submitted") === "true";
+    }
+
+    markAsSubmitted() {
+        localStorage.setItem("survey_submitted", "true");
+    }
+
+    getParticipantType() {
+        return this.state.participantType;
+    }
+
     setParticipantType(type) {
         this.state.participantType = type;
         this.state.validation.section1 = !!type;

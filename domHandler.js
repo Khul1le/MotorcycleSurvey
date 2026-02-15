@@ -89,12 +89,35 @@ export function initializeElements() {
     // Final section elements
     elements.issueOtherCheckboxFinal = document.getElementById('issue_other_specify');
     elements.otherIssueSpecifyFinal = document.getElementById('otherIssueSpecifyFinal');
+
+    // --- Section 3 NEW elements ---
+    elements.bestPlatformOtherCheckbox = document.getElementById('best_platform_other');
+    elements.bestPlatformOtherSpecify = document.getElementById('bestPlatformOtherSpecify');
+
+    elements.findOtherCheckbox = document.getElementById('find_other');
+    elements.findOtherSpecify = document.getElementById('findOtherSpecify');
+
+    elements.factorOtherRadio = document.getElementById('factor_other');
+    elements.factorOtherSpecify = document.getElementById('factorOtherSpecify');
+
+    elements.growthOtherRadio = document.getElementById('growth_other');
+    elements.growthOtherSpecify = document.getElementById('growthOtherSpecify');
+    
+    //Phone Number Addition
+    elements.phoneNumber = document.getElementById('phoneNumber');
+    elements.phoneError = document.getElementById('phoneError');
     
     return elements;
 }
 
 export function showSection(element) {
-    if (element) element.classList.remove('hidden-section');
+  if (element) {
+    element.classList.remove('hidden-section');
+    element.classList.add('active-section');
+
+    // ✅ Force scroll to top when a new section is shown
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
 
 export function hideSection(element) {
@@ -246,7 +269,9 @@ export function setupAllOtherSpecifyListeners(elements, callback) {
         [elements.bikeOtherRadioMO, elements.otherFixedBikeSpecifyMO],
         [elements.issueOtherCheckboxDM, elements.otherIssueSpecifyDM],
         [elements.bikeOtherRadioDM, elements.otherFixedBikeSpecifyDM],
-        [elements.issueOtherCheckboxFinal, elements.otherIssueSpecifyFinal]
+        [elements.issueOtherCheckboxFinal, elements.otherIssueSpecifyFinal],
+        [elements.bestPlatformOtherCheckbox, elements.bestPlatformOtherSpecify],
+        [elements.findOtherCheckbox, elements.findOtherSpecify]
     ];
     fields.forEach(([trigger, controlled]) => {
         if (trigger && controlled) {
@@ -399,32 +424,33 @@ function setRoleHeadingsVisibility(show) {
 }
 
 export function renumberSection2Questions() {
-  // We only renumber "question cards" which are direct children of .space-y-8
+  // Get ALL question blocks inside section 2 question containers
   const blocks = document.querySelectorAll(
     '#driverQuestions .space-y-8 > div, ' +
     '#ownerQuestions .space-y-8 > div, ' +
     '#mechanicQuestions .space-y-8 > div'
   );
 
-  // Keep only the blocks that are visible
-  const visibleBlocks = Array.from(blocks).filter(
-    (b) => !b.classList.contains('hidden-section')
-  );
+  // Only keep blocks that are actually visible:
+  // - not hidden themselves
+  // - AND no ancestor has .hidden-section (covers hidden containers)
+const visibleBlocks = Array.from(blocks).filter((block) => {
+  // true visible test: block is not hidden AND not inside a hidden container
+  return block.closest('.hidden-section') === null;
+});
 
   let n = 1;
 
   visibleBlocks.forEach((block) => {
-    // Grab ALL labels inside the block and pick the "question prompt" label.
-    // The prompt label is the one that starts with "number. " (e.g., "10. ...")
+    // Find the label that contains the question number.
+    // We target the first label that starts with "number. "
     const labels = Array.from(block.querySelectorAll('label'));
-
     const promptLabel = labels.find((lbl) =>
-      /^\s*\d+\.\s+/.test(lbl.textContent || "")
+      /^\s*\d+\.\s+/.test((lbl.textContent || '').trim())
     );
 
     if (!promptLabel) return;
 
-    // Replace only the leading number part (e.g., "10. " -> "1. ")
     promptLabel.textContent = promptLabel.textContent.replace(
       /^\s*\d+\.\s+/,
       `${n}. `
@@ -432,4 +458,49 @@ export function renumberSection2Questions() {
 
     n += 1;
   });
+}
+
+export function renumberSection3Questions() {
+  // Only direct question blocks in section 3 (your final wrapper uses .section-container)
+  const blocks = document.querySelectorAll('#section3 .section-container > div');
+
+  const visibleBlocks = Array.from(blocks).filter((block) => {
+    return block.closest('.hidden-section') === null;
+  });
+
+  let n = 1;
+
+  visibleBlocks.forEach((block) => {
+    const labels = Array.from(block.querySelectorAll('label'));
+    const promptLabel = labels.find((lbl) =>
+      /^\s*\d+\.\s+/.test((lbl.textContent || "").trim())
+    );
+
+    if (!promptLabel) return;
+
+    promptLabel.textContent = promptLabel.textContent.replace(
+      /^\s*\d+\.\s+/,
+      `${n}. `
+    );
+
+    n += 1;
+  });
+}
+
+export function setupOtherRadioText(groupName, otherRadio, otherText, callback) {
+  if (!otherRadio || !otherText) return;
+
+  const radios = Array.from(document.querySelectorAll(`input[name="${groupName}"]`));
+  if (radios.length === 0) return;
+
+  const update = () => {
+    const enabled = !!otherRadio.checked;
+    otherText.disabled = !enabled;
+    if (!enabled) otherText.value = '';
+    if (enabled) otherText.focus();
+    if (callback) callback();
+  };
+
+  radios.forEach(r => r.addEventListener('change', update));
+  update();
 }
